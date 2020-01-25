@@ -9,6 +9,7 @@ public class ManagerMain {
         try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("/home/MapReduce/MapReduce.obj"))) {
             MapReduce mapReduce = (MapReduce)objectInputStream.readObject();
             ArrayList<String> arrayList = FileUtil.ReadInputFile();
+            System.out.println("Waiting to connect to Mappers");
             SplittingServer splittingServer = new SplittingServer(mapReduce,arrayList);
             splittingServer.Connect();
         }

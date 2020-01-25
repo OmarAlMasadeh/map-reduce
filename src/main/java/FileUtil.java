@@ -21,7 +21,7 @@ public class FileUtil {
 
     public static ArrayList<String> ReadInputFile() {
         ArrayList arrayList = new ArrayList<String>(32768);
-        try (BufferedReader InputFileReader = new BufferedReader(new FileReader("input.txt"))){
+        try (BufferedReader InputFileReader = new BufferedReader(new FileReader("/home/MapReduce/input.txt"))){
             Matcher matcher;
             String str = InputFileReader.readLine();
             while (str != null) {

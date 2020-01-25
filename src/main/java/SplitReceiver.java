@@ -8,7 +8,7 @@ public class SplitReceiver {
     Socket socket;
     public SplitReceiver() {
         try {
-        socket = new Socket("localhost", 8000);
+        socket = new Socket("172.18.0.2", 50505);
         System.out.println("Connected to server");
         } catch (IOException e) {
             e.printStackTrace();

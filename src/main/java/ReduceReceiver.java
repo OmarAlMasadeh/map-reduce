@@ -14,9 +14,10 @@ public class ReduceReceiver {
     private ExecutorService executor ;
     private int counter;
     private final MapReduce mapReduce;
+    public ArrayList<Integer>[] recievedArrayList;
     public ReduceReceiver(MapReduce mapReduce){
         try {
-            serverSocket = new ServerSocket( 8000);
+            serverSocket = new ServerSocket( 50505);
             System.out.println("Connected to server");
         } catch (IOException e) {
             e.printStackTrace();
@@ -24,6 +25,7 @@ public class ReduceReceiver {
         this.mapReduce = mapReduce;
         counter = 0;
         hashMap = new ConcurrentHashMap<String,Integer[]>();
+        recievedArrayList = new ArrayList[mapReduce.getNumberOfMappers()];
     }
     public void StartRecieving(){
         executor = Executors.newFixedThreadPool(mapReduce.getNumberOfMappers());
@@ -50,10 +52,9 @@ public class ReduceReceiver {
                 BufferedReader reader = new BufferedReader(new InputStreamReader(mapperSocket.getInputStream()));
                 BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(mapperSocket.getOutputStream()));
 
-
-                while (!(reader.read() == 0x2406)){}// acknowledgment code
                 System.out.println("starting to receive from mapper " + mapperIndex);
                 ObjectInputStream objectInputStream = new ObjectInputStream(mapperSocket.getInputStream());
+                while (!(reader.read() == 0x2406)){}
                 String key = (String) objectInputStream.readObject();
                 int[] values = (int[]) objectInputStream.readObject();
 

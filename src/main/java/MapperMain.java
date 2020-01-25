@@ -13,8 +13,9 @@ public class MapperMain {
         HashMap hashMap = mapReduce.getMapper().Map(Split);
         System.out.println("Finished Mapping");
         HashMap<String, Integer> indexes = Shuffler.Shuffle(mapReduce, hashMap);
-        //System.out.println(indexes.values().stream().filter(v -> v == 0).count());
-
+        ShufflerSocket shufflerSocket = new ShufflerSocket(mapReduce.getNumberOfReducers());
+        shufflerSocket.SendtoReducers(indexes,hashMap);
+        System.out.println("finished shuffling");
     }
 
 }

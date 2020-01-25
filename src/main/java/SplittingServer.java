@@ -12,7 +12,7 @@ public class SplittingServer {
     private ExecutorService executor ;
     private int counter;
     final private static String HOSTNAME = "localhost";
-    final private static int PORT = 8000;
+    final private static int PORT = 50505;
     private ArrayList<String> array;
     public ServerSocket serverSocket;
     private int chunckSize;
