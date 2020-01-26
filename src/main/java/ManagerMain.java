@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ManagerMain {
     public static void main(String[] args) throws InterruptedException {
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("MapReduce.obj"))) {
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("/home/MapReduce/MapReduce.obj"))) {
             System.out.println("Manager Started");
             MapReduce mapReduce = (MapReduce)objectInputStream.readObject();
             ArrayList<String> arrayList = FileUtil.ReadInputFile();
