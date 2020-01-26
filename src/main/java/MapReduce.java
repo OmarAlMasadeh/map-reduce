@@ -52,9 +52,11 @@ public class MapReduce implements Serializable {
         try {
             System.out.println("Hello");
             BashScriptExecuter.CreateManager();
+            Thread.sleep(10000);
             BashScriptExecuter.CreateMappers(this.numberOfMappers);
-            BashScriptExecuter.CreateReducers(this.numberOfReducers);
-            BashScriptExecuter.ManagerProcess.waitFor();
+            Thread.sleep(10000);
+            //BashScriptExecuter.CreateReducers(this.numberOfReducers);
+            //BashScriptExecuter.ManagerProcess.waitFor();
         }catch (IOException | InterruptedException e){
             e.printStackTrace();
         }
