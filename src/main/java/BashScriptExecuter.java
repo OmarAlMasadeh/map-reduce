@@ -4,12 +4,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class BashScriptExecuter {
+    public static Process ManagerProcess;
     public static void CreateManager() throws IOException, InterruptedException {
         String[] command = {"/home/omar/IdeaProjects/MapReduce/src/main/resources/BashScripts/CreateManager.sh"};
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         processBuilder.inheritIO();
         Process process = processBuilder.start();
-        process.waitFor();
+        ManagerProcess = process;
     }
     public static void CreateMappers(int numberOfMappers) throws IOException {
         String[] command = {"/home/omar/IdeaProjects/MapReduce/src/main/resources/BashScripts/CreateMappers.sh",String.valueOf(numberOfMappers)};
