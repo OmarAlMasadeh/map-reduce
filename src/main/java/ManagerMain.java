@@ -2,15 +2,18 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class ManagerMain {
-    public static void main(String[] args) {
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("/home/MapReduce/MapReduce.obj"))) {
+    public static void main(String[] args) throws InterruptedException {
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("MapReduce.obj"))) {
+            System.out.println("Manager Started");
             MapReduce mapReduce = (MapReduce)objectInputStream.readObject();
             ArrayList<String> arrayList = FileUtil.ReadInputFile();
-            System.out.println("Waiting to connect to Mappers");
-            SplittingServer splittingServer = new SplittingServer(mapReduce,arrayList);
+            ArrayList<String>[] Splits = Splitter.Split(arrayList,mapReduce.getNumberOfMappers());
+            System.out.println("Finished Splitting \nWaiting for Connections");
+            SplittingServer splittingServer = new SplittingServer(mapReduce,Splits,mapReduce.getNumberOfMappers());
             splittingServer.Connect();
         }
         catch (IOException | ClassNotFoundException e){
