@@ -9,6 +9,7 @@ public class BashScriptExecuter {
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         processBuilder.inheritIO();
         Process process = processBuilder.start();
+        process.waitFor();
     }
     public static void CreateMappers(int numberOfMappers) throws IOException {
         String[] command = {"/home/omar/IdeaProjects/MapReduce/src/main/resources/BashScripts/CreateMappers.sh",String.valueOf(numberOfMappers)};
