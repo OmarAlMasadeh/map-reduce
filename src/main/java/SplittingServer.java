@@ -64,7 +64,7 @@ public class SplittingServer <T>  {
                 objectOutputStream.writeObject(mapReduce);
                 objectOutputStream.flush();
                 String clientAddress = clientSocket.getRemoteSocketAddress().toString();
-                int index = Integer.parseInt(clientAddress.substring(clientAddress.lastIndexOf(".")));
+                int index = Integer.parseInt(clientAddress.substring(clientAddress.lastIndexOf(".")+1,clientAddress.lastIndexOf(":")-1));
                 System.out.println("sending to "+clientAddress+ " .. " + index);
                 objectOutputStream.writeObject(Splits[index]);
                 objectOutputStream.flush();
