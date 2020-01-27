@@ -13,7 +13,7 @@ public class FileUtil {
 
     static {
         try {
-            OutPutFileWriter = new BufferedWriter(new FileWriter("/home/MapReduce/output.txt"));
+            OutPutFileWriter = new BufferedWriter(new FileWriter("output.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,7 +49,7 @@ public class FileUtil {
         }
     }
     public static void  WriteMapReduceObject(MapReduce mapReduce){
-        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("/home/MapReduce/MapReduce.obj"))){
+        try (ObjectOutputStream objectOutputStream = new ObjectOutputStream(new FileOutputStream("MapReduce.obj"))){
             objectOutputStream.writeObject(mapReduce);
         }
         catch (IOException e) {
