@@ -9,17 +9,18 @@ public class MapperMain {
         MapReduce mapReduce = splitReceiver.receiveMapReduce();
         System.out.println(mapReduce.getNumberOfMappers());
         ArrayList<String> Split = splitReceiver.receiveSplit();
-        System.out.println(Split);
         System.out.println();
         System.out.println("Received Split of " + Split.size() + " Words");
         System.out.println("Mapping...");
-        HashMap<String,ArrayList<Integer>> hashMap = mapReduce.getMapper().Map(Split);
-        System.out.println(hashMap);
-        System.out.println("Finished Mapping "+ hashMap.size());
-        HashMap<String, Integer> indexes = Shuffler.Shuffle(mapReduce, hashMap);
+        HashMap<String,ArrayList<Integer>> Mapped = mapReduce.getMapper().Map(Split);
+        HashMap<String, Integer> indexes = Shuffler.Shuffle(mapReduce, Mapped);
         System.out.println("index "+ indexes.size());
         //System.out.println(indexes.values().stream().filter(v -> v == 0).count());
-        HashMap<String,ArrayList<Integer>>[] shuffledHashMaps = Shuffler.ShuffleArrays(indexes,hashMap,mapReduce.getNumberOfReducers());
+        HashMap<String,ArrayList<Integer>>[] shuffledHashMaps = Shuffler.ShuffleArrays(indexes,Mapped,mapReduce.getNumberOfReducers());
+        for(int i=0;i<shuffledHashMaps.length;i++){
+            System.out.println(shuffledHashMaps.length);
+            System.out.println(shuffledHashMaps[i]);
+        }
         SplittingServer splittingServer = new SplittingServer(mapReduce,shuffledHashMaps,mapReduce.getNumberOfReducers());
         splittingServer.Connect();
         System.out.println("Finished Shuffling");
