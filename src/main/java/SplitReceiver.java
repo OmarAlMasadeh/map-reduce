@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class SplitReceiver {
     Socket socket;
-    private final String HOSTNAME;
+    private String HOSTNAME;
     private final int PORT = 50505;
     ObjectInputStream objectInputStream;
     public SplitReceiver(String hostname) {
