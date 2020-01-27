@@ -14,11 +14,15 @@ public class ReducerMain {
         HashMap<String, ArrayList<Integer>>[] beforeReduce = new HashMap[mapReduce.getNumberOfMappers()];
         beforeReduce[0]=splitReceiver.receiveSplit();
         System.out.println(beforeReduce[0].size());
-        for(int i =1;i<mapReduce.getNumberOfMappers();i++) {
+        splitReceiver = new SplitReceiver("172.18.1.1");
+        beforeReduce[1]=splitReceiver.receiveSplit();
+        System.out.println(beforeReduce[0].size());
+        /*for(int i =1;i<mapReduce.getNumberOfMappers();i++) {
             splitReceiver = new SplitReceiver("172.18.1."+i);
             beforeReduce[i]= splitReceiver.receiveSplit();
             System.out.println(beforeReduce[i].size());
         }
+         */
         while (true);
     }
 }
