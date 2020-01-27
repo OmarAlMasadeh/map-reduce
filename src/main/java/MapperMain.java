@@ -18,7 +18,6 @@ public class MapperMain {
         //System.out.println(indexes.values().stream().filter(v -> v == 0).count());
         HashMap<String,ArrayList<Integer>>[] shuffledHashMaps = Shuffler.ShuffleArrays(indexes,Mapped,mapReduce.getNumberOfReducers());
         for(int i=0;i<shuffledHashMaps.length;i++){
-            System.out.println(shuffledHashMaps.length);
             System.out.println(shuffledHashMaps[i]);
         }
         SplittingServer splittingServer = new SplittingServer(mapReduce,shuffledHashMaps,mapReduce.getNumberOfReducers());
