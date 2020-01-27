@@ -43,7 +43,7 @@ public class FileUtil {
         Arrays.sort(keys);
         for(String key : keys) {
             OutPutFileWriter.write(key+","+hashMap.get(key));
-            System.out.println(hashMap.get(key));
+            System.out.println(key+","+hashMap.get(key));
         }
     }
     public static void  WriteMapReduceObject(MapReduce mapReduce){
