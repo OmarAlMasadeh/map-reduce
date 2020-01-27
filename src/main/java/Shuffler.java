@@ -18,7 +18,9 @@ public class Shuffler {
         for(int i = 0; i<numberOfReducers;i++) {
             shuffledHashMaps[i]=new HashMap<String,ArrayList<Integer>>();
         }
-        System.out.println("Hello");
+        System.out.println("Hellofromshuffler");
+        System.out.println(indexes.size());
+        System.out.println(hashMap.size());
         Iterator it = hashMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
