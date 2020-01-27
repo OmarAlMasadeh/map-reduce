@@ -39,9 +39,9 @@ public class FileUtil {
     //write output
     public static void WriteOutputFile(HashMap hashMap) throws IOException {
 
-        Object[] keys = hashMap.keySet().toArray();
+        String[] keys = (String[]) hashMap.keySet().toArray();
         Arrays.sort(keys);
-        for(Object key : keys) {
+        for(String key : keys) {
             OutPutFileWriter.write(key+","+hashMap.get(key));
             System.out.println(hashMap.get(key));
         }
