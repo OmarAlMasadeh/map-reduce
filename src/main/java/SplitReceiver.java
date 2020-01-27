@@ -37,7 +37,7 @@ public class SplitReceiver {
     public MapReduce receiveMapReduce(){
         try {
             BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            socketWriter.write("hello");
+            socketWriter.write(0x2406);
             socketWriter.flush();
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             return (MapReduce) objectInputStream.readObject();
