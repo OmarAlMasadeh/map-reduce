@@ -14,10 +14,11 @@ public class MapperMain {
         HashMap hashMap = mapReduce.getMapper().Map(Split);
         System.out.println("Finished Mapping");
         HashMap<String, Integer> indexes = Shuffler.Shuffle(mapReduce, hashMap);
-
-        ShufflerSocket shufflerSocket = new ShufflerSocket(mapReduce.getNumberOfReducers());
-        shufflerSocket.SendtoReducers(indexes,hashMap);
-        System.out.println("finished shuffling");
+        //System.out.println(indexes.values().stream().filter(v -> v == 0).count());
+        HashMap<String,ArrayList<Integer>>[] shuffledHashMaps = Shuffler.ShuffleArrays(indexes,hashMap,mapReduce.getNumberOfReducers());
+        SplittingServer splittingServer = new SplittingServer(mapReduce,shuffledHashMaps,mapReduce.getNumberOfReducers());
+        splittingServer.Connect();
+        System.out.println("Finished Shuffling");
     }
 
 }

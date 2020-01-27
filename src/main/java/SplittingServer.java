@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class SplittingServer {
+public class SplittingServer <T>  {
     private int numberOfClients;
     private ExecutorService executor ;
     private int counter;
-    final private static int PORT = 8000;
-    private ArrayList<String>[] Splits;
+    final private static int PORT = 50505;
+    private T[] Splits;
     public ServerSocket serverSocket;
     private final MapReduce mapReduce;
-    public SplittingServer(MapReduce mapReduce , ArrayList<String>[] input ,int numberOfClients){
+    public SplittingServer(MapReduce mapReduce , T[] input ,int numberOfClients){
         try { serverSocket = new ServerSocket(PORT); }
         catch (IOException e){ System.out.println("Unable to Create ServerSocket"); }
         this.mapReduce = mapReduce;
@@ -65,7 +65,7 @@ public class SplittingServer {
                 objectOutputStream.flush();
                 objectOutputStream.writeObject(Splits[clientIndex]);
                 objectOutputStream.flush();
-                System.out.println("finished sending split (" + Splits[clientIndex].size() + ") to " + clientIndex);
+                System.out.println("finished sending split to " + clientIndex);
             }
             catch (IOException e) { e.printStackTrace(); }
         }

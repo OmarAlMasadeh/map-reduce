@@ -16,6 +16,17 @@ public class Shuffler {
         }
         return indexHM;
     }
+    public static HashMap<String,ArrayList<Integer>>[] ShuffleArrays(HashMap<String,Integer> indexes , HashMap<String,ArrayList<Integer>> hashMap ,int numberOfReducers){
+        HashMap[] shuffledHashMaps = new HashMap[numberOfReducers];
+        Iterator it = hashMap.entrySet().iterator();
+        while (it.hasNext()) {
+            Map.Entry pair = (Map.Entry) it.next();
+            int index = indexes.get(pair.getKey());
+            shuffledHashMaps[index].put(pair.getKey(),pair.getValue());
+            it.remove();
+        }
+        return shuffledHashMaps;
+    }
     private static int generateIndexFromKey(MapReduce mapReduce,String s){
         return s.hashCode()%mapReduce.getNumberOfReducers();
     }
