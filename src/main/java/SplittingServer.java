@@ -57,12 +57,14 @@ public class SplittingServer <T>  {
         @Override
         public void run() {
             try {
-                System.out.println("Connected to worker "+ clientIndex);
+                System.out.println("Connected to worker "+ clientIndex + " " + clientSocket);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
                 while (!(reader.read() == 0x2406)){}
+                System.out.println("SendingObject");
                 objectOutputStream.writeObject(mapReduce);
                 objectOutputStream.flush();
+                System.out.println("sent");
                 objectOutputStream.writeObject(Splits[clientIndex]);
                 objectOutputStream.flush();
                 System.out.println("finished sending split to " + clientIndex);
