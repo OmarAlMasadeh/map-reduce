@@ -32,7 +32,7 @@ public class ReducerMain {
             while (it.hasNext()) {
                 Map.Entry pair = (Map.Entry) it.next();
                 if(mergedHashMap.containsKey(pair.getKey())){
-                    mergedHashMap.get(pair.getKey()).addAll((ArrayList<Integer>) pair.getKey());
+                    mergedHashMap.get(pair.getKey()).addAll((ArrayList<Integer>) pair.getValue());
                 }else{
                     mergedHashMap.put((String)pair.getKey(),(ArrayList<Integer>) pair.getValue());
                 }
