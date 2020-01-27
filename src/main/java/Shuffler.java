@@ -25,6 +25,7 @@ public class Shuffler {
             shuffledHashMaps[index].put(pair.getKey(),pair.getValue());
             it.remove();
         }
+        System.out.println(shuffledHashMaps[0].size());
         return shuffledHashMaps;
     }
     private static int generateIndexFromKey(MapReduce mapReduce,String s){
