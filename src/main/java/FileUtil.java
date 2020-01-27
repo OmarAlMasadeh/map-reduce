@@ -1,9 +1,6 @@
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -41,11 +38,12 @@ public class FileUtil {
 
     //write output
     public static void WriteOutputFile(HashMap hashMap) throws IOException {
-        Iterator it = hashMap.entrySet().iterator();
-        while (it.hasNext()) {
-            Map.Entry pair = (Map.Entry)it.next();
-            OutPutFileWriter.write(pair.getKey()+","+pair.getValue());
-            it.remove();
+
+        Object[] keys = hashMap.keySet().toArray();
+        Arrays.sort(keys);
+        for(Object key : keys) {
+            OutPutFileWriter.write(key+","+hashMap.get(key));
+            System.out.println(hashMap.get(key));
         }
     }
     public static void  WriteMapReduceObject(MapReduce mapReduce){

@@ -25,8 +25,6 @@ public class ManagerMain {
                 System.out.println(((HashMap<String,Integer>)rec.get(i)).size());
                 output.putAll((HashMap<String,Integer>)rec.get(i));
             }
-            System.out.println(output.size());
-            System.out.println(output);
             FileUtil.WriteOutputFile(output);
         }
         catch (IOException | ClassNotFoundException e){
