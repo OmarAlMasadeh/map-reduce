@@ -9,9 +9,12 @@ public class MapperMain {
         MapReduce mapReduce = splitReceiver.receiveMapReduce();
         System.out.println(mapReduce.getNumberOfMappers());
         ArrayList<String> Split = splitReceiver.receiveSplit();
+        System.out.println(Split);
+        System.out.println();
         System.out.println("Received Split of " + Split.size() + " Words");
         System.out.println("Mapping...");
         HashMap<String,ArrayList<Integer>> hashMap = mapReduce.getMapper().Map(Split);
+        System.out.println(hashMap);
         System.out.println("Finished Mapping "+ hashMap.size());
         HashMap<String, Integer> indexes = Shuffler.Shuffle(mapReduce, hashMap);
         System.out.println("index "+ indexes.size());
