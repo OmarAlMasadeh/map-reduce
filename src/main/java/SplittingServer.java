@@ -63,7 +63,7 @@ public class SplittingServer <T>  {
                 //while (!(reader.read() == 0x2406)){System.out.print("1");}
                 objectOutputStream.writeObject(mapReduce);
                 objectOutputStream.flush();
-                System.out.println("sent");
+                System.out.println(clientIndex);
                 objectOutputStream.writeObject(Splits[clientIndex]);
                 objectOutputStream.flush();
                 System.out.println("finished sending split to " + clientIndex);
