@@ -22,8 +22,8 @@ public class SplitReceiver {
         try (
                 BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
         ){
-            socketWriter.write(0x2406);
-            socketWriter.flush();
+            //socketWriter.write(0x2406);
+            //socketWriter.flush();
             Split = (ArrayList<String>) objectInputStream.readObject();
         }
         catch (UnknownHostException e){
