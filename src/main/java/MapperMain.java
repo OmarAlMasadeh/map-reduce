@@ -5,7 +5,7 @@ import java.util.List;
 
 public class MapperMain {
     public static void main(String[] args) {
-        SplitReceiver splitReceiver = new SplitReceiver();
+        SplitReceiver splitReceiver = new SplitReceiver("172.18.0.2");
         MapReduce mapReduce = splitReceiver.receiveMapReduce();
         System.out.println(mapReduce.getNumberOfMappers());
         ArrayList<String> Split = splitReceiver.receiveSplit();

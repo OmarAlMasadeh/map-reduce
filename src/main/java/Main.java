@@ -5,8 +5,8 @@ public class Main {
         long startTime = System.currentTimeMillis();
         WordCount wordCount = new WordCount();
         MapReduce mapReduce = new MapReduce.MapReduceBuilder()
-                .numberOfMappers(5)
-                .numberOfReducers(5)
+                .numberOfMappers(2)
+                .numberOfReducers(3)
                 .mapper(wordCount)
                 .reducer(wordCount)
                 .build();
