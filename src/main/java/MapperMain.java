@@ -1,13 +1,12 @@
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class MapperMain {
     public static void main(String[] args) {
-        SplitReceiver splitReceiver = new SplitReceiver("172.18.0.2");
-        MapReduce mapReduce = splitReceiver.receiveMapReduce();
-        ArrayList<String> Split = splitReceiver.receiveSplit();
+        ClientReceiver clientReceiver = new ClientReceiver("172.18.0.2");
+        MapReduce mapReduce = clientReceiver.receiveMapReduce();
+        ArrayList<String> Split = clientReceiver.receiveSplit();
         System.out.println("Received Split of " + Split.size() + " Words");
 
         System.out.println("Mapping...");
@@ -19,8 +18,8 @@ public class MapperMain {
         //System.out.println(indexes.values().stream().filter(v -> v == 0).count());
 
         HashMap<String,ArrayList<Integer>>[] shuffledHashMaps = Shuffler.ShuffleArrays(indexes,Mapped,mapReduce.getNumberOfReducers());
-        SplittingServer splittingServer = new SplittingServer(mapReduce,shuffledHashMaps,mapReduce.getNumberOfReducers());
-        splittingServer.Connect();
+        ServerSender serverSender = new ServerSender(mapReduce,shuffledHashMaps,mapReduce.getNumberOfReducers());
+        serverSender.Connect();
         System.out.println("Finished Shuffling");
     }
 

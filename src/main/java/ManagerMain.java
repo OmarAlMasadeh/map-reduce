@@ -2,7 +2,6 @@
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.sql.SQLOutput;
 import java.util.ArrayList;
 
 public class ManagerMain {
@@ -15,8 +14,8 @@ public class ManagerMain {
             System.out.println(arrayList.size());
             ArrayList<String>[] Splits = Splitter.Split(arrayList,mapReduce.getNumberOfMappers());
             System.out.println("Finished Splitting \nWaiting for Connections");
-            SplittingServer splittingServer = new SplittingServer(mapReduce,Splits,mapReduce.getNumberOfMappers());
-            splittingServer.Connect();
+            ServerSender serverSender = new ServerSender(mapReduce,Splits,mapReduce.getNumberOfMappers());
+            serverSender.Connect();
         }
         catch (IOException | ClassNotFoundException e){
             e.printStackTrace();

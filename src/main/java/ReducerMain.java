@@ -1,7 +1,3 @@
-
-import org.w3c.dom.ls.LSOutput;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -10,20 +6,29 @@ import java.util.Map;
 public class ReducerMain {
     public static void main(String[] args) {
         System.out.println("Reducer Created");
-        SplitReceiver splitReceiver = new SplitReceiver("172.18.1.0");
-        MapReduce mapReduce = splitReceiver.receiveMapReduce();
+        ClientReceiver clientReceiver = new ClientReceiver("172.18.1.0");
+        MapReduce mapReduce = clientReceiver.receiveMapReduce();
         System.out.println("mapreduce "+mapReduce.getNumberOfMappers());
         HashMap<String, ArrayList<Integer>>[] beforeReduce = new HashMap[mapReduce.getNumberOfMappers()];
-        beforeReduce[0]=splitReceiver.receiveSplit();
+        beforeReduce[0]= clientReceiver.receiveSplit();
         System.out.println(beforeReduce[0].size());
         for(int i =1;i<mapReduce.getNumberOfMappers();i++) {
-            splitReceiver = new SplitReceiver("172.18.1."+i);
-            splitReceiver.receiveMapReduce();
-            beforeReduce[i]= splitReceiver.receiveSplit();
+            clientReceiver = new ClientReceiver("172.18.1."+i);
+            clientReceiver.receiveMapReduce();
+            beforeReduce[i]= clientReceiver.receiveSplit();
             System.out.println(beforeReduce[i].size());
         }
         HashMap<String, ArrayList<Integer>> mergedHasMap = MergeHashMaps(beforeReduce);
-        System.out.println(mergedHasMap.size());
+        System.out.println("Merged "+ mergedHasMap.size());
+
+        //Reducing
+        HashMap reducedHM = mapReduce.getReducer().Reduce(mergedHasMap);
+        System.out.println("Reduced size "+reducedHM.size());
+
+        //Send reduced hashmap to manager
+        ClientSender clientSender = new ClientSender("172.18.0.2");
+        clientSender.Send(reducedHM);
+        System.out.println("Finished sending");
     }
     private static HashMap<String, ArrayList<Integer>> MergeHashMaps(HashMap<String, ArrayList<Integer>>[] splitHashMaps){
         HashMap<String, ArrayList<Integer>> mergedHashMap = splitHashMaps[0];
