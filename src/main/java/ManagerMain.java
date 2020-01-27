@@ -26,6 +26,7 @@ public class ManagerMain {
                 output.putAll((HashMap<String,Integer>)rec.get(i));
             }
             FileUtil.WriteOutputFile(output);
+            while (true){}
         }
         catch (IOException | ClassNotFoundException e){
             e.printStackTrace();
