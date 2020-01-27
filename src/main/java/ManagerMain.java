@@ -3,6 +3,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class ManagerMain {
     public static void main(String[] args) throws InterruptedException {
@@ -16,6 +17,17 @@ public class ManagerMain {
             System.out.println("Finished Splitting \nWaiting for Connections");
             ServerSender serverSender = new ServerSender(mapReduce,Splits,mapReduce.getNumberOfMappers());
             serverSender.Connect();
+
+            ServerReceiver serverReceiver = new ServerReceiver(mapReduce,mapReduce.getNumberOfReducers());
+            ArrayList rec = serverReceiver.Connect();
+            HashMap<String , Integer> output = new HashMap<>();
+            for(int i = 0 ; i<rec.size();i++){
+                System.out.println(((HashMap<String,Integer>)rec.get(i)).size());
+                output.putAll((HashMap<String,Integer>)rec.get(i));
+            }
+            System.out.println(output.size());
+            System.out.println(output);
+            FileUtil.WriteOutputFile(output);
         }
         catch (IOException | ClassNotFoundException e){
             e.printStackTrace();

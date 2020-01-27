@@ -40,7 +40,7 @@ public class FileUtil {
     }
 
     //write output
-    void WriteOutputFile(HashMap hashMap) throws IOException {
+    public static void WriteOutputFile(HashMap hashMap) throws IOException {
         Iterator it = hashMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
