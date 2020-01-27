@@ -7,13 +7,15 @@ import java.util.ArrayList;
 
 public class ManagerMain {
     public static void main(String[] args) throws InterruptedException {
-        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("/home/MapReduce/MapReduce.obj"))) {
+        try(ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream("MapReduce.obj"))) {
             System.out.println("Manager Started");
             MapReduce mapReduce = (MapReduce)objectInputStream.readObject();
+            System.out.println(mapReduce.getNumberOfMappers());
             ArrayList<String> arrayList = FileUtil.ReadInputFile();
+            System.out.println(arrayList.size());
             ArrayList<String>[] Splits = Splitter.Split(arrayList,mapReduce.getNumberOfMappers());
             System.out.println("Finished Splitting \nWaiting for Connections");
-            SplittingServer splittingServer = new SplittingServer<>(mapReduce,Splits,mapReduce.getNumberOfMappers());
+            SplittingServer splittingServer = new SplittingServer(mapReduce,Splits,mapReduce.getNumberOfMappers());
             splittingServer.Connect();
         }
         catch (IOException | ClassNotFoundException e){
