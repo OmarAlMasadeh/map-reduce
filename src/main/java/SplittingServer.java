@@ -60,7 +60,11 @@ public class SplittingServer <T>  {
                 System.out.println("Connected to worker "+ clientIndex + " " + clientSocket);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(clientSocket.getOutputStream());
-                while (reader.readLine().equals("hello")){ }
+                String str = reader.readLine();
+                while (str.contains("hello")){
+                    str = str + reader.readLine();
+                    System.out.println(str);
+                }
                 System.out.println("SendingObject");
                 objectOutputStream.writeObject(mapReduce);
                 objectOutputStream.flush();
