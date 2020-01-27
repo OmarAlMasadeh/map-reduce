@@ -37,12 +37,13 @@ public class SplitReceiver {
     public MapReduce receiveMapReduce(){
         try {
             BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            socketWriter.write(0x2406);
-            socketWriter.flush();
+            //socketWriter.write(0x2406);
+            //socketWriter.flush();
+            Thread.sleep(2000);
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             return (MapReduce) objectInputStream.readObject();
         }
-        catch (IOException | ClassNotFoundException e){
+        catch (IOException | ClassNotFoundException | InterruptedException e){
             e.printStackTrace();
         }
         return null;
