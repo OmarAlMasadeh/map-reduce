@@ -8,7 +8,6 @@ public class MapperMain {
         MapReduce mapReduce = clientReceiver.receiveMapReduce();
         ArrayList<String> Split = clientReceiver.receiveSplit();
         System.out.println("Received Split of " + Split.size() + " Words");
-
         System.out.println("Mapping...");
         HashMap<String,ArrayList<Integer>> Mapped = mapReduce.getMapper().Map(Split);
 
