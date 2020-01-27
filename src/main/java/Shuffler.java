@@ -17,13 +17,9 @@ public class Shuffler {
         for(int i = 0; i<numberOfReducers;i++) {
             shuffledHashMaps[i]=new HashMap<String,ArrayList<Integer>>();
         }
-        System.out.println("Hellofromshuffler");
-        System.out.println(indexes.size());
-        System.out.println(Mapped.size());
         Iterator it = Mapped.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
-            System.out.println("Key = " + pair.getKey() + ", Value = " +pair.getValue());
             int index = indexes.get(pair.getKey());
             shuffledHashMaps[index].put(pair.getKey(),pair.getValue());
         }
@@ -31,6 +27,6 @@ public class Shuffler {
         return shuffledHashMaps;
     }
     private static int generateIndexFromKey(MapReduce mapReduce,String s){
-        return s.hashCode()%mapReduce.getNumberOfReducers();
+        return Math.abs(s.hashCode()%mapReduce.getNumberOfReducers());
     }
 }
