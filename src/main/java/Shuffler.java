@@ -9,19 +9,18 @@ public class Shuffler {
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry)it.next();
             indexHM.put(pair.getKey(),generateIndexFromKey(mapReduce,(String)pair.getKey()));
-            it.remove();
         }
         return indexHM;
     }
-    public static HashMap<String,ArrayList<Integer>>[] ShuffleArrays(HashMap<String,Integer> indexes , HashMap<String,ArrayList<Integer>> hashMap ,int numberOfReducers){
+    public static HashMap<String,ArrayList<Integer>>[] ShuffleArrays(HashMap<String,Integer> indexes , HashMap<String,ArrayList<Integer>> Mapped ,int numberOfReducers){
         HashMap[] shuffledHashMaps = new HashMap[numberOfReducers];
         for(int i = 0; i<numberOfReducers;i++) {
             shuffledHashMaps[i]=new HashMap<String,ArrayList<Integer>>();
         }
         System.out.println("Hellofromshuffler");
         System.out.println(indexes.size());
-        System.out.println(hashMap.size());
-        Iterator it = hashMap.entrySet().iterator();
+        System.out.println(Mapped.size());
+        Iterator it = Mapped.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry pair = (Map.Entry) it.next();
             System.out.println("Key = " + pair.getKey() + ", Value = " +pair.getValue());
