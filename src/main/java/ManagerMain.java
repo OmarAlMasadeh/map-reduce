@@ -13,7 +13,7 @@ public class ManagerMain {
             ArrayList<String> arrayList = FileUtil.ReadInputFile();
             ArrayList<String>[] Splits = Splitter.Split(arrayList,mapReduce.getNumberOfMappers());
             System.out.println("Finished Splitting \nWaiting for Connections");
-            SplittingServer splittingServer = new SplittingServer(mapReduce,Splits,mapReduce.getNumberOfMappers());
+            SplittingServer splittingServer = new SplittingServer<>(mapReduce,Splits,mapReduce.getNumberOfMappers());
             splittingServer.Connect();
         }
         catch (IOException | ClassNotFoundException e){
