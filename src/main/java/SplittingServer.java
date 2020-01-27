@@ -63,7 +63,8 @@ public class SplittingServer <T>  {
                 String str = reader.readLine();
                 while (str.contains("hello")){
                     str = str + reader.readLine();
-                    System.out.println(str);
+                    if(!str.isEmpty())
+                        System.out.println(str);
                 }
                 System.out.println("SendingObject");
                 objectOutputStream.writeObject(mapReduce);
