@@ -23,7 +23,6 @@ public class Shuffler {
             int index = indexes.get(pair.getKey());
             shuffledHashMaps[index].put(pair.getKey(),pair.getValue());
         }
-        System.out.println(shuffledHashMaps[0]);
         return shuffledHashMaps;
     }
     private static int generateIndexFromKey(MapReduce mapReduce,String s){
