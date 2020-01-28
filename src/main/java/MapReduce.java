@@ -11,7 +11,6 @@ public class MapReduce implements Serializable {
     private final String outputFileName;
     private final Mapper mapper ;
     private final Reducer reducer;
-    //private InetAddress[] inetAddresses;
 
     private MapReduce(MapReduceBuilder builder) {
         this.numberOfMappers = builder.numberOfMappers;
