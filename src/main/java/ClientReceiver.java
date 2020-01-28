@@ -1,5 +1,6 @@
 
 import java.io.*;
+import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -11,17 +12,13 @@ public class ClientReceiver {
     ObjectInputStream objectInputStream;
     public ClientReceiver(String hostname) {
         this.HOSTNAME = hostname;
-        socket = hostAvailabilityCheck(hostname);
-        System.out.println("Connected to server");
-
-    }
-    public Socket hostAvailabilityCheck(String HOSTNAME) {
-        while (true)
-            try (Socket s = new Socket(HOSTNAME, PORT)) {
-            return s;
-            } catch (IOException ex) {
-            /* ignore */
-            }
+        try {
+            while (!(InetAddress.getByName(hostname).isReachable(60000))){}
+            socket = new Socket(HOSTNAME,PORT);
+            System.out.println("Connected to server");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     public <T> T receiveSplit(){
         T Split = null;
