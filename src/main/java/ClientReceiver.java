@@ -13,10 +13,10 @@ public class ClientReceiver {
     public ClientReceiver(String hostname) {
         this.HOSTNAME = hostname;
         try {
-            while (!(InetAddress.getByName(hostname).isReachable(600000))){Thread.sleep(1000);}
+            while (!(InetAddress.getByName(hostname).isReachable(36000))){}
             socket = new Socket(HOSTNAME,PORT);
             System.out.println("Connected to server");
-        } catch (IOException | InterruptedException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
