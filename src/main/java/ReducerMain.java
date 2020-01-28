@@ -6,7 +6,7 @@ import java.util.Map;
 public class ReducerMain {
     public static void main(String[] args) throws InterruptedException {
         System.out.println("Reducer Created");
-        Thread.sleep(10000);
+        Thread.sleep(15000);
         ClientReceiver clientReceiver = new ClientReceiver("172.18.1.0");
         MapReduce mapReduce = clientReceiver.receiveMapReduce();
 

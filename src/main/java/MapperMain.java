@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 public class MapperMain {
     public static void main(String[] args) throws InterruptedException {
-        Thread.sleep(3000);
         ClientReceiver clientReceiver = new ClientReceiver("172.18.0.2");
         MapReduce mapReduce = clientReceiver.receiveMapReduce();
         ArrayList<String> Split = clientReceiver.receiveSplit();
