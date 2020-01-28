@@ -1,27 +1,35 @@
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 public class BashScriptExecuter {
-    public static Process ManagerProcess;
-    public static void CreateManager() throws IOException, InterruptedException {
+    /**
+     * @throws IOException
+     * runs a bash script that uses docker to create Manager
+     */
+    public static void CreateManager() throws IOException {
         String[] command = {"/home/omar/IdeaProjects/MapReduce/src/main/resources/BashScripts/CreateManager.sh"};
         ProcessBuilder processBuilder = new ProcessBuilder(command);
-        //processBuilder.inheritIO();
         Process process = processBuilder.start();
-        ManagerProcess = process;
     }
-    public static void CreateMappers(int numberOfMappers) throws IOException, InterruptedException {
+
+    /**
+     * @param numberOfMappers number of Mappers to be created
+     * @throws IOException
+     * runs a bash script that uses docker to create Mappers
+     */
+    public static void CreateMappers(int numberOfMappers) throws IOException{
         String[] command = {"/home/omar/IdeaProjects/MapReduce/src/main/resources/BashScripts/CreateMappers.sh",String.valueOf(numberOfMappers)};
         ProcessBuilder processBuilder = new ProcessBuilder(command);
-        //processBuilder.inheritIO();
         Process process = processBuilder.start();
     }
+
+    /**
+     * @param numberOfReducers number of reducers to be created
+     * @throws IOException
+     * runs a bash script that uses docker to create reducers
+     */
     public static void CreateReducers(int numberOfReducers) throws IOException {
         String[] command = {"/home/omar/IdeaProjects/MapReduce/src/main/resources/BashScripts/CreateReducers.sh", String.valueOf(numberOfReducers)};
         ProcessBuilder processBuilder = new ProcessBuilder(command);
-        //processBuilder.inheritIO();
         Process process = processBuilder.start();
     }
 }

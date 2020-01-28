@@ -9,15 +9,13 @@ public class ReducerMain {
         Thread.sleep(10000);
         ClientReceiver clientReceiver = new ClientReceiver("172.18.1.0");
         MapReduce mapReduce = clientReceiver.receiveMapReduce();
-        System.out.println("mapreduce "+mapReduce.getNumberOfMappers());
+
         HashMap<String, ArrayList<Integer>>[] beforeReduce = new HashMap[mapReduce.getNumberOfMappers()];
         beforeReduce[0]= clientReceiver.receiveSplit();
-        System.out.println(beforeReduce[0].size());
         for(int i =1;i<mapReduce.getNumberOfMappers();i++) {
             clientReceiver = new ClientReceiver("172.18.1."+i);
             clientReceiver.receiveMapReduce();
             beforeReduce[i]= clientReceiver.receiveSplit();
-            System.out.println(beforeReduce[i].size());
         }
         HashMap<String, ArrayList<Integer>> mergedHasMap = MergeHashMaps(beforeReduce);
         System.out.println("Merged "+ mergedHasMap.size());
