@@ -15,9 +15,10 @@ public class ClientReceiver {
         this.HOSTNAME = hostname;
         try {
             while (!(InetAddress.getByName(hostname).isReachable(36000))){}
+            Thread.sleep(2000);
             socket = new Socket(HOSTNAME,PORT);
             System.out.println("Connected to server");
-        } catch (IOException e) {
+        } catch (IOException | InterruptedException e ) {
             e.printStackTrace();
         }
     }
