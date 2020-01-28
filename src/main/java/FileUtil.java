@@ -53,8 +53,10 @@ public class FileUtil {
             }
     }
 
-    public static void WriteStatsFile(long Time,int [] sizes){
+    public static void WriteStatsFile(long Time,int [] sizes) throws IOException {
         File f = new File("/home/MapReduce/stats.txt");
+        if(!f.exists())
+            f.createNewFile();
         if(f.exists() && !f.isDirectory())
             try(BufferedWriter OutPutFileWriter = new BufferedWriter(new FileWriter(f))){
                 OutPutFileWriter.write("Stats File For MapReduce");
