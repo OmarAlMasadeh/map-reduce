@@ -63,7 +63,7 @@ public class FileUtil {
                 OutPutFileWriter.newLine();
                 float total = Arrays.stream(sizes).sum();
                 for(int i =0;i<sizes.length;i++) {
-                    OutPutFileWriter.write("Received from Reducer "+ i + ": "+ sizes[i] + " keys  "+ sizes[i]/total + "%");
+                    OutPutFileWriter.write("Received from Reducer "+ i + ": "+ sizes[i] + " keys  "+ sizes[i]/total*100 + "%");
                     OutPutFileWriter.newLine();
                 }
                 OutPutFileWriter.write("Total keys = " + total);

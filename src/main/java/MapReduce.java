@@ -50,13 +50,14 @@ public class MapReduce implements Serializable {
     public void ExecuteMapReduce(){
         FileUtil.WriteMapReduceObject(this);
         try {
-            System.out.println("Hello");
+            System.out.println("Creating Manager");
             BashScriptExecuter.CreateManager();
             Thread.sleep(10000);
+            System.out.println("Creating Mappers");
             BashScriptExecuter.CreateMappers(this.numberOfMappers);
             Thread.sleep(10000);
+            System.out.println("Creating Reducers");
             BashScriptExecuter.CreateReducers(this.numberOfReducers);
-            //BashScriptExecuter.ManagerProcess.waitFor();
         }catch (IOException | InterruptedException e){
             e.printStackTrace();
         }
