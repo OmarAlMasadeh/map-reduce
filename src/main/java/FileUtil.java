@@ -61,10 +61,14 @@ public class FileUtil {
             try(BufferedWriter OutPutFileWriter = new BufferedWriter(new FileWriter(f))){
                 OutPutFileWriter.write("Stats File For MapReduce");
                 OutPutFileWriter.newLine();
+                float total = Arrays.stream(sizes).sum();
                 for(int i =0;i<sizes.length;i++) {
-                    OutPutFileWriter.write("Received from Reducer "+ i + ": "+ sizes[i] + "keys");
+                    OutPutFileWriter.write("Received from Reducer "+ i + ": "+ sizes[i] + " keys  "+ sizes[i]/total + "%");
                     OutPutFileWriter.newLine();
                 }
+                OutPutFileWriter.write("Total keys = " + total);
+                OutPutFileWriter.newLine();
+                OutPutFileWriter.write("Execution Time = " + Time);
             }
             catch (IOException e){
                 e.printStackTrace();
