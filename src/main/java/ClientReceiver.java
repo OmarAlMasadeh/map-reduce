@@ -11,20 +11,22 @@ public class ClientReceiver {
     ObjectInputStream objectInputStream;
     public ClientReceiver(String hostname) {
         this.HOSTNAME = hostname;
-        try {
-            socket = new Socket(HOSTNAME, PORT);
-            System.out.println("Connected to server");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        socket = hostAvailabilityCheck(hostname);
+        System.out.println("Connected to server");
+
+    }
+    public Socket hostAvailabilityCheck(String HOSTNAME) {
+        while (true)
+            try (Socket s = new Socket(HOSTNAME, PORT)) {
+            return s;
+            } catch (IOException ex) {
+            /* ignore */
+            }
     }
     public <T> T receiveSplit(){
         T Split = null;
-        try (
-                BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-        ){
-            //socketWriter.write(0x2406);
-            //socketWriter.flush();
+        try{
+
             Split = (T) objectInputStream.readObject();
         }
         catch (UnknownHostException e){
@@ -38,8 +40,6 @@ public class ClientReceiver {
     public MapReduce receiveMapReduce(){
         try {
             BufferedWriter socketWriter = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-            //socketWriter.write(0x2406);
-            //socketWriter.flush();
             Thread.sleep(2000);
             objectInputStream = new ObjectInputStream(socket.getInputStream());
             return (MapReduce) objectInputStream.readObject();
