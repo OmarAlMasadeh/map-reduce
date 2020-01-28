@@ -36,7 +36,8 @@ public class FileUtil {
                 Arrays.sort(keys);
                 for (Object key : keys) {
                     OutPutFileWriter.write(key + "," + hashMap.get(key));
-                    System.out.println(key + "," + hashMap.get(key));
+                    OutPutFileWriter.newLine();
+                    //System.out.println(key + "," + hashMap.get(key));
                 }
             }
             catch (IOException e){
