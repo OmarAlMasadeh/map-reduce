@@ -16,7 +16,7 @@ public class BashScriptExecuter {
      * @throws IOException
      * runs a bash script that uses docker to create Mappers
      */
-    public static void CreateMappers(int numberOfMappers) throws IOException{
+    public static void CreateMappers(int numberOfMappers) throws IOException, InterruptedException {
         String[] command = {"/home/omar/IdeaProjects/MapReduce/src/main/resources/BashScripts/CreateMappers.sh",String.valueOf(numberOfMappers)};
         ProcessBuilder processBuilder = new ProcessBuilder(command);
         Process process = processBuilder.start();
